@@ -2,9 +2,19 @@
 
 import { useEffect, useState } from "react";
 
+interface Advocate {
+  firstName: string;
+  lastName: string;
+  city: string;
+  degree: string;
+  specialties: string[];
+  yearsOfExperience: number;
+  phoneNumber: number;
+}
+
 export default function Home() {
-  const [advocates, setAdvocates] = useState([]);
-  const [filteredAdvocates, setFilteredAdvocates] = useState([]);
+  const [advocates, setAdvocates] = useState<Advocate[]>([]);
+  const [filteredAdvocates, setFilteredAdvocates] = useState<Advocate[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
@@ -17,7 +27,7 @@ export default function Home() {
     });
   }, []);
 
-  const onChange = (e) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const term = e.target.value;
     const searchTermLower = term.toLowerCase();
 
@@ -30,7 +40,7 @@ export default function Home() {
         advocate.lastName.toLowerCase().includes(searchTermLower) ||
         advocate.city.toLowerCase().includes(searchTermLower) ||
         advocate.degree.toLowerCase().includes(searchTermLower) ||
-        advocate.specialties.some((s) => s.toLowerCase().includes(searchTermLower)) ||
+        advocate.specialties.some((s: string) => s.toLowerCase().includes(searchTermLower)) ||
         advocate.yearsOfExperience.toString().includes(searchTermLower)
       );
     });
