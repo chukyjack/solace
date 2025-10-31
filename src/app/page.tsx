@@ -44,13 +44,11 @@ export default function Home() {
   };
 
   return (
-    <main style={{ margin: "24px" }}>
-      <h1>Solace Advocates</h1>
-      <br />
-      <br />
-      <SearchBar searchTerm={searchTerm} onChange={onChange} onReset={onReset} />
-      <br />
-      <br />
+    <main className="container mx-auto px-4 py-8 max-w-7xl">
+      <h1 className="text-3xl font-bold text-gray-900 mb-8">Solace Advocates</h1>
+      <div className="mb-8">
+        <SearchBar searchTerm={searchTerm} onChange={onChange} onReset={onReset} />
+      </div>
       {loading ? (
         <LoadingState />
       ) : error ? (
