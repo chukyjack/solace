@@ -1,6 +1,6 @@
 "use client";
 
-import { Advocate } from "../types/advocate";
+import { Advocate } from "../../types/advocate";
 
 interface SpecialtiesCellProps {
   advocate: Advocate;

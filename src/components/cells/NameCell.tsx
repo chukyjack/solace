@@ -1,4 +1,4 @@
-import { Advocate } from "../types/advocate";
+import { Advocate } from "../../types/advocate";
 
 interface NameCellProps {
   advocate: Advocate;
