@@ -8,6 +8,9 @@
 - Created pagination UI with page numbers and controls
 
 **User Experience:**
+- Switched to [TanStack Table](https://tanstack.com/table/v8) for highly performant and flexible React table rendering
+  - Enables features like column virtualization, efficient row rendering, and better customizability
+  - Paves the way for future enhancements like server-side sorting and advanced filtering
 - Formatted phone numbers for readability: `(555) 123-4567`
 - Made table scrollable with pagination always visible
 - Improved component structure with modular, reusable components
