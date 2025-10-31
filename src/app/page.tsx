@@ -6,6 +6,7 @@ import SearchBar from "../components/SearchBar";
 import LoadingState from "../components/LoadingState";
 import ErrorState from "../components/ErrorState";
 import AdvocatesTable from "../components/AdvocatesTable";
+import Pagination from "../components/Pagination";
 
 interface PaginationInfo {
   total: number;
@@ -85,8 +86,6 @@ export default function Home() {
 
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
-    // Scroll to top of table when page changes
-    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -100,35 +99,21 @@ export default function Home() {
       ) : error ? (
         <ErrorState message={error} />
       ) : (
-        <>
-          <AdvocatesTable advocates={advocates} />
-          {/* Pagination UI will be added in Step 4 */}
-          {pagination && pagination.totalPages > 1 && (
-            <div className="mt-6 flex items-center justify-between">
-              <div className="text-sm text-gray-700">
-                Showing {((pagination.page - 1) * pagination.pageSize) + 1} to{" "}
-                {Math.min(pagination.page * pagination.pageSize, pagination.total)} of{" "}
-                {pagination.total} results
-              </div>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => handlePageChange(page - 1)}
-                  disabled={page === 1}
-                  className="px-4 py-2 border rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
-                >
-                  Previous
-                </button>
-                <button
-                  onClick={() => handlePageChange(page + 1)}
-                  disabled={page >= pagination.totalPages}
-                  className="px-4 py-2 border rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
-                >
-                  Next
-                </button>
-              </div>
-            </div>
+        <div className="flex flex-col">
+          <div className="overflow-y-auto max-h-[calc(100vh-300px)]">
+            <AdvocatesTable advocates={advocates} />
+          </div>
+          {pagination && (
+            <Pagination
+              currentPage={pagination.page}
+              totalPages={pagination.totalPages}
+              total={pagination.total}
+              pageSize={pagination.pageSize}
+              onPageChange={handlePageChange}
+              loading={loading}
+            />
           )}
-        </>
+        </div>
       )}
     </main>
   );

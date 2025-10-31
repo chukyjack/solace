@@ -1,6 +1,3 @@
-import db from "..";
-import { advocates } from "../schema";
-
 const specialties = [
   "Bipolar",
   "LGBTQ",
@@ -30,149 +27,99 @@ const specialties = [
   "Domestic abuse",
 ];
 
-const randomSpecialty = () => {
-  const random1 = Math.floor(Math.random() * 24);
-  const random2 = Math.floor(Math.random() * (24 - random1)) + random1 + 1;
+const firstNames = [
+  "John", "Jane", "Alice", "Michael", "Emily", "Chris", "Jessica", "David",
+  "Laura", "Daniel", "Sarah", "James", "Megan", "Joshua", "Amanda", "Robert",
+  "Jennifer", "William", "Lisa", "Richard", "Michelle", "Joseph", "Kimberly",
+  "Thomas", "Angela", "Charles", "Ashley", "Christopher", "Brenda", "Matthew",
+  "Emma", "Anthony", "Olivia", "Mark", "Cynthia", "Donald", "Marie", "Steven",
+  "Janet", "Andrew", "Catherine", "Kenneth", "Frances", "Joshua", "Christine",
+  "Kevin", "Samantha", "Brian", "Deborah", "George", "Rachel", "Edward", "Carolyn",
+  "Ronald", "Janet", "Timothy", "Virginia", "Jason", "Maria", "Jeffrey", "Heather",
+  "Ryan", "Diane", "Jacob", "Julie", "Gary", "Joyce", "Nicholas", "Victoria",
+  "Eric", "Kelly", "Jonathan", "Christina", "Stephen", "Joan", "Larry", "Evelyn",
+  "Justin", "Judith", "Scott", "Megan", "Brandon", "Cheryl", "Benjamin", "Andrea",
+  "Samuel", "Hannah", "Frank", "Jacqueline", "Gregory", "Martha", "Raymond", "Gloria",
+  "Alexander", "Teresa", "Patrick", "Sara", "Jack", "Janice", "Dennis", "Marie",
+  "Jerry", "Julia", "Tyler", "Grace", "Aaron", "Judy", "Jose", "Theresa",
+];
 
-  return [random1, random2];
+const lastNames = [
+  "Doe", "Smith", "Johnson", "Brown", "Davis", "Martinez", "Taylor", "Harris",
+  "Clark", "Lewis", "Lee", "King", "Green", "Walker", "Hall", "Allen",
+  "Young", "Hernandez", "King", "Wright", "Lopez", "Hill", "Scott", "Adams",
+  "Baker", "Gonzalez", "Nelson", "Carter", "Mitchell", "Perez", "Roberts", "Turner",
+  "Phillips", "Campbell", "Parker", "Evans", "Edwards", "Collins", "Stewart", "Sanchez",
+  "Morris", "Rogers", "Reed", "Cook", "Morgan", "Bell", "Murphy", "Bailey",
+  "Rivera", "Cooper", "Richardson", "Cox", "Howard", "Ward", "Torres", "Peterson",
+  "Gray", "Ramirez", "James", "Watson", "Brooks", "Kelly", "Sanders", "Price",
+  "Bennett", "Wood", "Barnes", "Ross", "Henderson", "Coleman", "Jenkins", "Perry",
+  "Powell", "Long", "Patterson", "Hughes", "Flores", "Washington", "Butler", "Simmons",
+  "Foster", "Gonzales", "Bryant", "Alexander", "Russell", "Griffin", "Diaz", "Hayes",
+];
+
+const cities = [
+  "New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia",
+  "San Antonio", "San Diego", "Dallas", "San Jose", "Austin", "Jacksonville",
+  "San Francisco", "Columbus", "Fort Worth", "Charlotte", "Seattle", "Denver",
+  "Washington", "Boston", "El Paso", "Nashville", "Detroit", "Oklahoma City",
+  "Portland", "Las Vegas", "Memphis", "Louisville", "Baltimore", "Milwaukee",
+  "Albuquerque", "Tucson", "Fresno", "Sacramento", "Kansas City", "Mesa",
+  "Atlanta", "Omaha", "Colorado Springs", "Raleigh", "Miami", "Long Beach",
+  "Virginia Beach", "Oakland", "Minneapolis", "Tulsa", "Arlington", "Tampa",
+];
+
+const degrees = ["MD", "PhD", "MSW"];
+
+// Generate random specialties (2-5 specialties per advocate)
+const getRandomSpecialties = () => {
+  const numSpecialties = Math.floor(Math.random() * 4) + 2; // 2-5 specialties
+  const shuffled = [...specialties].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, numSpecialties);
 };
 
-const advocateData = [
-  {
-    firstName: "John",
-    lastName: "Doe",
-    city: "New York",
-    degree: "MD",
-    specialties: specialties.slice(...randomSpecialty()),
-    yearsOfExperience: 10,
-    phoneNumber: 5551234567,
-  },
-  {
-    firstName: "Jane",
-    lastName: "Smith",
-    city: "Los Angeles",
-    degree: "PhD",
-    specialties: specialties.slice(...randomSpecialty()),
-    yearsOfExperience: 8,
-    phoneNumber: 5559876543,
-  },
-  {
-    firstName: "Alice",
-    lastName: "Johnson",
-    city: "Chicago",
-    degree: "MSW",
-    specialties: specialties.slice(...randomSpecialty()),
-    yearsOfExperience: 5,
-    phoneNumber: 5554567890,
-  },
-  {
-    firstName: "Michael",
-    lastName: "Brown",
-    city: "Houston",
-    degree: "MD",
-    specialties: specialties.slice(...randomSpecialty()),
-    yearsOfExperience: 12,
-    phoneNumber: 5556543210,
-  },
-  {
-    firstName: "Emily",
-    lastName: "Davis",
-    city: "Phoenix",
-    degree: "PhD",
-    specialties: specialties.slice(...randomSpecialty()),
-    yearsOfExperience: 7,
-    phoneNumber: 5553210987,
-  },
-  {
-    firstName: "Chris",
-    lastName: "Martinez",
-    city: "Philadelphia",
-    degree: "MSW",
-    specialties: specialties.slice(...randomSpecialty()),
-    yearsOfExperience: 9,
-    phoneNumber: 5557890123,
-  },
-  {
-    firstName: "Jessica",
-    lastName: "Taylor",
-    city: "San Antonio",
-    degree: "MD",
-    specialties: specialties.slice(...randomSpecialty()),
-    yearsOfExperience: 11,
-    phoneNumber: 5554561234,
-  },
-  {
-    firstName: "David",
-    lastName: "Harris",
-    city: "San Diego",
-    degree: "PhD",
-    specialties: specialties.slice(...randomSpecialty()),
-    yearsOfExperience: 6,
-    phoneNumber: 5557896543,
-  },
-  {
-    firstName: "Laura",
-    lastName: "Clark",
-    city: "Dallas",
-    degree: "MSW",
-    specialties: specialties.slice(...randomSpecialty()),
-    yearsOfExperience: 4,
-    phoneNumber: 5550123456,
-  },
-  {
-    firstName: "Daniel",
-    lastName: "Lewis",
-    city: "San Jose",
-    degree: "MD",
-    specialties: specialties.slice(...randomSpecialty()),
-    yearsOfExperience: 13,
-    phoneNumber: 5553217654,
-  },
-  {
-    firstName: "Sarah",
-    lastName: "Lee",
-    city: "Austin",
-    degree: "PhD",
-    specialties: specialties.slice(...randomSpecialty()),
-    yearsOfExperience: 10,
-    phoneNumber: 5551238765,
-  },
-  {
-    firstName: "James",
-    lastName: "King",
-    city: "Jacksonville",
-    degree: "MSW",
-    specialties: specialties.slice(...randomSpecialty()),
-    yearsOfExperience: 5,
-    phoneNumber: 5556540987,
-  },
-  {
-    firstName: "Megan",
-    lastName: "Green",
-    city: "San Francisco",
-    degree: "MD",
-    specialties: specialties.slice(...randomSpecialty()),
-    yearsOfExperience: 14,
-    phoneNumber: 5559873456,
-  },
-  {
-    firstName: "Joshua",
-    lastName: "Walker",
-    city: "Columbus",
-    degree: "PhD",
-    specialties: specialties.slice(...randomSpecialty()),
-    yearsOfExperience: 9,
-    phoneNumber: 5556781234,
-  },
-  {
-    firstName: "Amanda",
-    lastName: "Hall",
-    city: "Fort Worth",
-    degree: "MSW",
-    specialties: specialties.slice(...randomSpecialty()),
-    yearsOfExperience: 3,
-    phoneNumber: 5559872345,
-  },
-];
+// Generate random phone number
+const getRandomPhoneNumber = () => {
+  const areaCode = Math.floor(Math.random() * 900) + 100; // 100-999
+  const exchange = Math.floor(Math.random() * 900) + 100; // 100-999
+  const number = Math.floor(Math.random() * 10000); // 0-9999
+  return parseInt(`${areaCode}${exchange}${number.toString().padStart(4, '0')}`);
+};
+
+// Generate advocates
+const generateAdvocates = (count: number) => {
+  const advocates = [];
+  const usedNames = new Set<string>();
+
+  for (let i = 0; i < count; i++) {
+    let firstName: string;
+    let lastName: string;
+    let fullName: string;
+
+    // Ensure unique names
+    do {
+      firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+      lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+      fullName = `${firstName} ${lastName}`;
+    } while (usedNames.has(fullName) && usedNames.size < firstNames.length * lastNames.length);
+
+    usedNames.add(fullName);
+
+    advocates.push({
+      firstName,
+      lastName,
+      city: cities[Math.floor(Math.random() * cities.length)],
+      degree: degrees[Math.floor(Math.random() * degrees.length)],
+      specialties: getRandomSpecialties(),
+      yearsOfExperience: Math.floor(Math.random() * 20) + 1, // 1-20 years
+      phoneNumber: getRandomPhoneNumber(),
+    });
+  }
+
+  return advocates;
+};
+
+// Generate 150 advocates to test pagination (6 pages with 25 per page)
+const advocateData = generateAdvocates(150);
 
 export { advocateData };
