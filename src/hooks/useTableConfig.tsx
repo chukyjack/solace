@@ -12,6 +12,7 @@ import { useState, useMemo } from "react";
 import { Advocate } from "../types/advocate";
 import NameCell from "../components/cells/NameCell";
 import SpecialtiesCell from "../components/cells/SpecialtiesCell";
+import { formatPhoneNumber } from "../utils/formatPhoneNumber";
 
 const columnHelper = createColumnHelper<Advocate>();
 
@@ -40,7 +41,9 @@ export function useTableConfig(advocates: Advocate[]): Table<Advocate> {
       }),
       columnHelper.accessor("phoneNumber", {
         header: "Phone Number",
-        cell: (info) => <span className="text-gray-500">{info.getValue()}</span>,
+        cell: (info) => (
+          <span className="text-gray-500">{formatPhoneNumber(info.getValue())}</span>
+        ),
       }),
     ],
     []
