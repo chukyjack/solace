@@ -10,30 +10,49 @@ export default function SearchBar({
   onReset,
 }: SearchBarProps) {
   return (
-    <div className="max-w-2xl">
-      <label htmlFor="search-input" className="block text-sm font-medium text-gray-700 mb-2">
-        Search Advocates
-      </label>
-      {searchTerm && (
-        <p className="text-sm text-gray-600 mb-3">
-          Searching for: <span className="font-medium text-gray-900">{searchTerm}</span>
-        </p>
-      )}
-      <div className="flex gap-2">
+    <div className="w-full relative">
+      <div className="relative">
+        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <svg
+            className="h-5 w-5 text-gray-400"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
+          </svg>
+        </div>
         <input
           id="search-input"
           type="text"
           placeholder="Search by name, city, degree, or specialty..."
-          className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-shadow"
+          className="w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-shadow"
           onChange={onChange}
           value={searchTerm}
         />
         {searchTerm && (
           <button
             onClick={onReset}
-            className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg transition-colors font-medium"
+            className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 transition-colors"
           >
-            Reset
+            <svg
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
           </button>
         )}
       </div>
